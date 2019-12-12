@@ -26,15 +26,18 @@ class Login extends Component{
     render(){
         return (
             <div className="Login">
-                <h2 className="page-title">LOGIN</h2>
                 <form className="login-form">
-                        Username
-                    <input type="text" className="username" onChange={this.handleChange}/>
-                        Password
-                    <input type="text" className="password"/><br/>
-                    <button type="submit">
-                        Login
-                    </button>
+                    <h2 className="page-title">LOGIN</h2>
+                    <input  type="text" 
+                            className="username"
+                            placeholder="Username" 
+                            Style="text-align: center"/>
+                    {/* onChange={this.handleChange} */}
+                    <input  type="password" 
+                            className="password"
+                            placeholder="Password"
+                            Style="text-align: center"/><br/><br/><br/>
+                    <input  type="submit" value="Submit" />
                 </form>
             </div>
         )

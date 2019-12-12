@@ -36,3 +36,105 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  height: 100vh;
+  background: linear-gradient(to top left, rgb(235, 180, 0), rgb(190, 9, 91));
+  background-repeat: cover;
+  color: white;
+}
+
+.Sign-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+  width: 22vw;
+  padding-left: 750px;
+  text-align: center;
+}
+
+.Login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 80vh;
+  width: 22vw;
+  padding-left: 750px;
+}
+
+input {
+  margin-bottom: 2vh;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  background-color:transparent;
+  outline: none;
+  color: white;
+  caret-color: white;
+  font-size: 13px;
+  width: 40vw;
+  font-weight: 800
+}
+
+input[type=text]::placeholder {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px
+}
+
+input[type=password]::placeholder {
+  text-align: center;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px
+}
+
+input[type=submit] {
+  background: rgba(255,255,255,.2);
+  width: 100%;
+  padding: 2vh;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px 4px;
+  border: 1px solid #ccc;
+  padding: 10px 30px;
+}
+
+input[type=submit]:active {
+  background: #e5e5e5;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+     -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+}
+
+.navbar {
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+  /* margin-top: -470px; */
+  z-index: 1;
+  width: 95vw;
+  font-size: 20px;
+  font-weight: 800;
+  align-items: center;
+  position:fixed;
+  margin: 25px;
+}
+
+a {
+  text-decoration: none;
+  color: white
+}
+
+.logo {
+  width: 80px
+}
+
+input:focus::placeholder{
+  color:transparent;
+}

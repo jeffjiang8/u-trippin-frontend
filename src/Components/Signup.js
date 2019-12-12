@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { createUser } from '../redux/action'
 
 class Signup extends Component {
 
@@ -43,23 +45,54 @@ class Signup extends Component {
 
     render(){
         return (
-            <div className="Login">
-                <h2 className="page-title">SIGN-UP</h2>
-                <form className="login-form" onSubmit={this.handleSubmit}>
-                        Username
-                    <input type="text" className="username"/>
-                        Password
-                    <input type='password' className="password"/>
-                        Confirm Password
-                    <input type='password' className="confirm-password"/>
-                    <br/>
-                    <button type="submit">
-                        Sign-up
-                    </button>
+            <div className="Sign-up">
+                <form className="signup-form" onSubmit={this.props.createUser}>
+                {/* onSubmit={this.handleSubmit} */}
+                    <h2 className="page-title">SIGN-UP</h2>
+                    <input  type="text" 
+                            className="username" 
+                            placeholder="Username"
+                            style={{textAlign: "center"}} />
+                    <input  type="text" 
+                            className="first-name" 
+                            placeholder="First Name" 
+                            style={{textAlign: "center"}} />
+                    <input  type="text" 
+                            className="last-name"
+                            placeholder="Last Name"
+                            style={{textAlign: "center"}} />
+                    <input  type="text" 
+                            className="age"
+                            placeholder="Age"
+                            style={{textAlign: "center"}} />
+                    <input  type="text" 
+                            className="email"
+                            placeholder="Email"
+                            style={{textAlign: "center"}} />
+                    <input  type="text" 
+                            className="phone-number"
+                            placeholder="(xxx)-xxx-xxxx"
+                            style={{textAlign: "center"}} />
+                    <input  type='password' 
+                            className="password"
+                            placeholder="Password"
+                            style={{textAlign: "center"}} />
+                    <input  type='password' 
+                            className="confirm-password"
+                            placeholder="Confirm Password"
+                            style={{textAlign: "center"}} /><br/><br/><br/>
+                    <input type="submit" value="Submit" />
                 </form>
             </div>
         )
     }
 }
 
-export default Signup;
+function msp(state){
+    console.log(state.username)
+    return {
+      reduxUsername: state.username
+    }
+  }
+
+export default  connect(msp, {createUser})(Signup);
