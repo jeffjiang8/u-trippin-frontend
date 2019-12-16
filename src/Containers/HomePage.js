@@ -35,7 +35,6 @@ class HomePage extends Component {
     }
 
     renderHomePage = ()=>{
-        console.log(this.state)
         return (
             <div className="home-page">
                 <div className="home-page-logo">
