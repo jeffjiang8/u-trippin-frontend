@@ -31,12 +31,12 @@ class Login extends Component{
                     <input  type="text" 
                             className="username"
                             placeholder="Username" 
-                            Style="text-align: center"/>
+                            style={{textAlign: "center"}}/>
                     {/* onChange={this.handleChange} */}
                     <input  type="password" 
                             className="password"
                             placeholder="Password"
-                            Style="text-align: center"/><br/><br/><br/>
+                            style={{textAlign: "center"}}/><br/><br/><br/>
                     <input  type="submit" value="Submit" />
                 </form>
             </div>

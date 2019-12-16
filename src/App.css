@@ -51,7 +51,7 @@ body {
   flex-direction: column;
   height: 80vh;
   width: 22vw;
-  padding-left: 750px;
+  padding-left: 555px;
   text-align: center;
 }
 
@@ -62,7 +62,7 @@ body {
   flex-direction: column;
   height: 80vh;
   width: 22vw;
-  padding-left: 750px;
+  padding-left: 555px;
 }
 
 input {
@@ -116,7 +116,6 @@ input[type=submit]:active {
   display: flex;
   height: 30px;
   justify-content: space-between;
-  /* margin-top: -470px; */
   z-index: 1;
   width: 95vw;
   font-size: 20px;
@@ -137,4 +136,35 @@ a {
 
 input:focus::placeholder{
   color:transparent;
+}
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100vw;
+}
+
+.slogan {
+  font-weight: 800;
+  font-size: 25px;
+}
+
+.origin {
+  width: 300px
+}
+
+.destination {
+  width: 300px
+}
+
+.departure-date {
+  width: 300px
 }
