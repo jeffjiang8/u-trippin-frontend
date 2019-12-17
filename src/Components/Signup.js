@@ -1,98 +1,128 @@
 import React, { Component } from 'react';
-// import {Redirect} from 'react-router-dom'
-import { connect } from 'react-redux'
-import { createUser } from '../redux/action'
+import {Link} from 'react-router-dom'
+
 
 class Signup extends Component {
 
-    // createUser = (username, password)=>{
-    //     console.log(username,password)
-    //     fetch('http://localhost:3000/api/v1/users',{
-    //         method: "POST",
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             'Accept': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             username: username,
-    //             password: password
-    //         })
-    //     })
-    //     .then(resp=>resp.json())
-    //     .then(console.log)
-        
-    // }
+        state = {
+                username: "",
+                firstName: "",
+                lastName: "",
+                age: "",
+                email: "",
+                phoneNumber: "",
+                password: "",
+                passwordConfirmation: "",
+        }
 
-    // handleSubmit = (e)=>{
-    //     e.persist()
-    //     e.preventDefault()
-    //     let userName = e.target[0].value
-    //     let password 
-    //     if (e.target[1].value === e.target[2].value){
-    //         password = e.target[1].value
-    //         this.createUser(userName, password)
-    //         if (!this.createUser(userName, password)){
-    //             window.alert("Username is taken, Please Try again")
-    //             document.getElementsByClassName("login-form")[0].reset()
-    //         } else {
-    //             return <Redirect to='/show'/>
-    //         }
-    //     } else {
-    //         window.alert("Please Try again")
-    //         document.getElementsByClassName("login-form")[0].reset()
-    //     }
-    // }
+        handleChange = (event) => {
+        this.setState({
+                [event.target.name]: event.target.value
+        })
+        }
 
-    render(){
-        return (
-            <div className="Sign-up">
-                <form className="signup-form" onSubmit={this.props.createUser}>
-                {/* onSubmit={this.handleSubmit} */}
-                    <h2 className="page-title">SIGN-UP</h2>
-                    <input  type="text" 
-                            className="username" 
-                            placeholder="Username"
-                            style={{textAlign: "center"}} />
-                    <input  type="text" 
-                            className="first-name" 
-                            placeholder="First Name" 
-                            style={{textAlign: "center"}} />
-                    <input  type="text" 
-                            className="last-name"
-                            placeholder="Last Name"
-                            style={{textAlign: "center"}} />
-                    <input  type="text" 
-                            className="age"
-                            placeholder="Age"
-                            style={{textAlign: "center"}} />
-                    <input  type="text" 
-                            className="email"
-                            placeholder="Email"
-                            style={{textAlign: "center"}} />
-                    <input  type="text" 
-                            className="phone-number"
-                            placeholder="(xxx)-xxx-xxxx"
-                            style={{textAlign: "center"}} />
-                    <input  type='password' 
-                            className="password"
-                            placeholder="Password"
-                            style={{textAlign: "center"}} />
-                    <input  type='password' 
-                            className="confirm-password"
-                            placeholder="Confirm Password"
-                            style={{textAlign: "center"}} /><br/><br/><br/>
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
-        )
-    }
+        handleSubmit = (e) => {
+                e.preventDefault()
+            
+                if (this.state.password === this.state.passwordConfirmation){
+                  fetch("http://localhost:4000/api/v1/signup", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        username: this.state.username, 
+                        first_name: this.state.firstName,
+                        last_name: this.state.lastName,
+                        age: this.state.age,
+                        email: this.state.email,
+                        phone_number: this.state.phoneNumber,
+                        password: this.state.password
+                        })
+                  })
+                  .then(res => res.json())
+                  .then(response => {
+                    if(response.errors){
+                      alert(response.errors)
+                    } else {
+                      // send them somewhere
+                      // storing the user object SOMEWHERE
+                      this.props.setUser(response)
+                    }
+                  })
+                } else {
+                  alert("Password Has To Match! Please Try Again!")
+                }
+            
+              }
+
+        render(){
+                return (
+                <div className="Sign-up">
+                        <form className="signup-form" onSubmit={this.props.createUser}>
+                        <h2 className="page-title">SIGN-UP</h2>
+                        <input  type="text" 
+                                className="username" 
+                                placeholder="Username"
+                                name="username"
+                                value={this.state.username}
+                                style={{textAlign: "center"}} 
+                                onChange={this.handleChange}/>
+                        <input  type="text" 
+                                className="first-name" 
+                                placeholder="First Name" 
+                                name="firstName"
+                                value={this.state.firstName}
+                                style={{textAlign: "center"}}
+                                onChange={this.handleChange}/>
+                        <input  type="text" 
+                                className="last-name"
+                                placeholder="Last Name"
+                                name="lastName"
+                                value={this.state.lastName}
+                                style={{textAlign: "center"}}
+                                onChange={this.handleChange}/>
+                        <input  type="text" 
+                                className="age"
+                                placeholder="Age"
+                                name="age"
+                                value={this.state.age}
+                                style={{textAlign: "center"}}
+                                onChange={this.handleChange}/>
+                        <input  type="text" 
+                                className="email"
+                                placeholder="Email"
+                                name="email"
+                                value={this.state.email}
+                                style={{textAlign: "center"}}
+                                onChange={this.handleChange}/>
+                        <input  type="text" 
+                                className="phone-number"
+                                placeholder="(xxx)-xxx-xxxx"
+                                name="phoneNumber"
+                                value={this.state.phoneNumber}
+                                style={{textAlign: "center"}}
+                                onChange={this.handleChange}/>
+                        <input  type='password' 
+                                className="password"
+                                placeholder="Password"
+                                name="password"
+                                value={this.state.password}
+                                style={{textAlign: "center"}}
+                                onChange={this.handleChange}/>
+                        <input  type='password' 
+                                className="confirm-password"
+                                placeholder="Confirm Password"
+                                name="passwordConfirmation"
+                                value={this.state.passwordConfirmation}
+                                style={{textAlign: "center"}} 
+                                onChange={this.handleChange}/><br/><br/><br/>
+                        <input type="submit" value="Submit" />
+                        </form>
+                </div>
+                )
+        }
 }
 
-function msp(state){
-    console.log(state.username)
-    return {
-      reduxUsername: state.username
-    }
-  }
-
-export default  connect(msp, {createUser})(Signup);
+export default  Signup;

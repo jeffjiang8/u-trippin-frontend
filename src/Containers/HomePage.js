@@ -15,15 +15,22 @@ class HomePage extends Component {
         API_ID: process.env.REACT_APP_API_ID,
         API_KEY: process.env.REACT_APP_API_KEY,
         API_KEY_2: process.env.REACT_APP_CITY_API_KEY,
+        currentUser: null,
         cityName: ''
     }
 
+    setUser = (user)=>{
+        this.setState({
+            currentUser: user
+        })
+    }
+
     renderLogin = ()=>{
-        return <Login />
+        return <Login setUser={this.setUser}/>
     }
 
     renderSignup = ()=>{
-        return <Signup />
+        return <Signup setUser={this.setUser} />
     }
 
     handleChange = (e)=>{
@@ -111,7 +118,7 @@ class HomePage extends Component {
         // console.log(this.state.API_KEY_2)
         return (
             <>
-                <NavBar />
+                <NavBar loggedIn={this.state.loggedIn}/>
                 <Switch>
                     <Route exact path='/home' render={this.renderHomePage} />
                     <Route path='/signup' render={this.renderSignup} />

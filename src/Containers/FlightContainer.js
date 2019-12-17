@@ -7,7 +7,7 @@ class FlightContainer extends Component {
 
     state = {
         flights: [],
-        selectedFlight: {},
+        selectedFlight: [],
         loading: true
     }
 
@@ -46,12 +46,9 @@ class FlightContainer extends Component {
         )
     }
 
-
     renderInfo = ()=>{
         return <FlightInfo key={this.state.selectedFlight.flightNumber} flight={this.state.selectedFlight}/>
     }
-
-    // 
 
     render() {
         console.log(this.state.selectedFlight)

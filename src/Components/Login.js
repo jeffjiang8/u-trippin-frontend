@@ -2,26 +2,40 @@ import React, {Component} from 'react';
 
 class Login extends Component{
 
-    // stata ={
-    //     username: ''
-    // }
+    state = {
+        username: "",
+        password: ""
+      }
+    
+      handleChange = (event) => {
+        this.setState({
+          [event.target.name]: event.target.value
+        })
+      }
 
-    // fetchUser = (username)=>{
-    //     fetch(`http://localhost:3000/api/v1/users/${username}`)
-    //     .then(resp=>resp.json())
-    //     .then(console.log)
-    //     // if data !==null{
-    //     // setstate currentuser
-    // }
-
-    // handleChange = (e)=>{
-    //     e.persist()
-    //     console.log(e)
-    // }
-
-    // handleSubmit = (e)=>{
-    //     e.persist()
-    // }
+    handleSubmit = (e) => {
+        e.preventDefault()
+    
+        fetch("http://localhost:3001/api/v1/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(this.state)
+        })
+        .then(res => res.json())
+        .then(response => {
+          //set user to state
+          //redirect!
+          if (response.errors){
+            alert(response.errors)
+          } else {
+            this.props.setUser(response)
+          }
+        })
+    
+      }
 
     render(){
         return (
@@ -31,11 +45,14 @@ class Login extends Component{
                     <input  type="text" 
                             className="username"
                             placeholder="Username" 
+                            name="username"
+                            value={this.state.username}
                             style={{textAlign: "center"}}/>
-                    {/* onChange={this.handleChange} */}
                     <input  type="password" 
                             className="password"
                             placeholder="Password"
+                            name="password"
+                            value={this.state.password}
                             style={{textAlign: "center"}}/><br/><br/><br/>
                     <input  type="submit" value="Submit" />
                 </form>
