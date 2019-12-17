@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import uuid from 'react-uuid'
 import NavBar from './NavBar'
 import Login from '../Components/Login'
 import Signup from '../Components/Signup'
 import FlightContainer from './FlightContainer'
+import Airports from '../Components/Airports'
 import { Switch, Route, Link } from 'react-router-dom'
 class HomePage extends Component {
 
@@ -11,7 +13,9 @@ class HomePage extends Component {
         destination: '',
         date: '',
         API_ID: process.env.REACT_APP_API_ID,
-        API_KEY: process.env.REACT_APP_API_KEY
+        API_KEY: process.env.REACT_APP_API_KEY,
+        API_KEY_2: process.env.REACT_APP_CITY_API_KEY,
+        cityName: ''
     }
 
     renderLogin = ()=>{
@@ -32,6 +36,12 @@ class HomePage extends Component {
 
     handleSubmit = (e)=>{
         e.preventDefault()
+    }
+
+    handleSearch = (cityName)=>{
+        fetch(`http://aviation-edge.com/v2/public/autocomplete?key=${this.state.API_KEY_2}&city=${cityName}`)
+        .then(resp=>resp.json())
+        .then(data=>console.log(data))
     }
 
     renderHomePage = ()=>{
@@ -58,25 +68,47 @@ class HomePage extends Component {
                         <input  type="text" 
                                 className="departure-date"
                                 name="date"
-                                placeholder="Departure (MM-DD-YYYY)"
+                                placeholder="Departure (YYYY/MM/DD)"
                                 style={{textAlign: "center"}} 
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange}/><br/>
                         <Link to='/flights'>
                             <input type="submit" value="GO!" style={{width: "535px"}} className="submit-flight-info"/>
                         </Link>
                     </form>
+                </div><br/><br/>
+                <div>
+                    <input  type="text" 
+                                className="city"
+                                name="cityName"
+                                placeholder="Look For Your Airport"
+                                onChange={this.handleChange}
+                                style={{textAlign: "center"}} />
+                </div>
+                <div>
+                    <button className="button" style={{'fontWeight': '800'}} onClick={()=>{this.handleSearch(this.state.cityName)}}>
+                        <span data-title="SEARCH">READY?</span>
+                    </button>
                 </div>
             </div>
         )
     }
 
+    renderAiports = ()=>{
+        return (
+            <Airports key={uuid()} city={this.state.cityName} apiKey={this.state.API_KEY_2} />
+        )
+    } 
+
     renderFlights = ()=>{
         return (
-        <FlightContainer state={this.state}/>
+            <FlightContainer key={uuid()} state={this.state}/>
         )
     }   
 
+    
+
     render() {
+        // console.log(this.state.API_KEY_2)
         return (
             <>
                 <NavBar />

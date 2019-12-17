@@ -7,6 +7,7 @@ class NavBar extends Component {
 
     render() {
         return (
+            <header>
             <div className = 'navbar'>
                     <a href='http://localhost:3000/home'>
                         <img src='./images/image.png' className="logo" alt='meh'/>
@@ -27,6 +28,7 @@ class NavBar extends Component {
                     }
                     
             </div>
+            </header>
         );
     }
 }
