@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import WeatherInfo from './WeatherInfo'
 import {Route, Link, Redirect} from 'react-router-dom'
 
 class FlightInfo extends Component {
@@ -25,16 +26,13 @@ class FlightInfo extends Component {
         .then(data=>this.setState({arrivalLatitude: data.airports[0].latitude, arrivalLongitude: data.airports[0].longitude}))
     }
 
-    handleClick = ()=>{
-        fetch(`https://api.weatherbit.io/v2.0/current?&lat=${this.state.arrivalLatitude}&lon=${this.state.arrivalLongitude}&key=${process.env.REACT_APP_WEATHER_API_KEY}`)
-        .then(resp=>resp.json())
-        .then(data=>this.setState({weather: data.data[0], clicked: true}))
-    }
+    // handleClick = ()=>{
+    //     fetch(`https://api.weatherbit.io/v2.0/current?&lat=${this.state.arrivalLatitude}&lon=${this.state.arrivalLongitude}&key=${process.env.REACT_APP_WEATHER_API_KEY}`)
+    //     .then(resp=>resp.json())
+    //     .then(data=>this.setState({weather: data.data[0], clicked: true}))
+    // }
 
     render() {
-        
-        console.log(this.state.weather)
-        
         const { carrierFsCode, 
                 flightNumber, 
                 departureAirportFsCode, 
@@ -54,35 +52,37 @@ class FlightInfo extends Component {
         
         return (
             <>
-                <div className="flight-info">
-                    <div className="info-body">
-                        <div className="info">
-                            <p>From: {departureAirportFsCode}</p>
-                            <p>Terminal: {departureTerminal}</p>
-                            <p>Departing: {departing.split('').slice(0,22)}</p><br/><br/>
-                            <p>Carrier: {carrierFsCode}</p>
-                            <p>Flight Number: {flightNumber}</p>
-                            <p>Stops: {stops}</p><br/><br/>
-                            <p>To: {arrivalAirportFsCode}</p>
-                            <p>Terminal: {arrivalTerminal}</p>
-                            <p>Arriving: {arriving.split('').slice(0,22)}</p>
+                {this.state.arrivalLatitude !== null ?
+                <>
+                    <div className="flight-info">
+                        <div className="info-body">
+                            <div className="info">
+                                <p>From: {departureAirportFsCode}</p>
+                                <p>Terminal: {departureTerminal}</p>
+                                <p>Departing: {departing.split('').slice(0,22)}</p><br/><br/>
+                                <p>Carrier: {carrierFsCode}</p>
+                                <p>Flight Number: {flightNumber}</p>
+                                <p>Stops: {stops}</p><br/><br/>
+                                <p>To: {arrivalAirportFsCode}</p>
+                                <p>Terminal: {arrivalTerminal}</p>
+                                <p>Arriving: {arriving.split('').slice(0,22)}</p>
+                            </div>
+                            
+                                {<WeatherInfo state={this.state} />}
+                            
                         </div>
-                        <div className="weather-info">
-                            {this.state.clicked
-                            ?
-                            <h1>hi</h1>
-                            :
-                            <button onClick={this.handleClick}>Check Weather</button>
-                            }
+                        <div className="book-btn">
+                            <button>Book</button>
                         </div>
                     </div>
-                    <div className="book-btn">
-                        <button>Book</button>
-                    </div>
-                </div>
-                    <Link to='/flights'>
-                        <button>Back</button>
-                    </Link>
+                        <Link to='/home/flights'>
+                            <button>Back</button>
+                        </Link>
+                </>
+                :
+                <h1>Loading...</h1>
+                
+                }
             </>
         )
     }

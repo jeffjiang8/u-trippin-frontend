@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import uuid from 'react-uuid'
-import NavBar from './NavBar'
-import Login from '../Components/Login'
-import Signup from '../Components/Signup'
 import FlightInfo from '../Components/FlightInfo'
 import FlightContainer from './FlightContainer'
+import Login from '../Components/Login'
+import Signup from '../Components/Signup'
 import { Switch, Route, Link } from 'react-router-dom'
 class HomePage extends Component {
 
@@ -12,26 +11,14 @@ class HomePage extends Component {
         origin: '',
         destination: '',
         date: '',
-        currentUser: null,
+        
         cityName: '',
         selectedFlight: {},
         airports: null,
         searched: false
     }
 
-    setUser = (user)=>{
-        this.setState({
-            currentUser: user
-        })
-    }
-
-    renderLogin = ()=>{
-        return <Login setUser={this.setUser}/>
-    }
-
-    renderSignup = ()=>{
-        return <Signup setUser={this.setUser} />
-    }
+    
 
     handleChange = (e)=>{
         let name = e.target.name
@@ -75,7 +62,7 @@ class HomePage extends Component {
                                 placeholder="Departure (YYYY/MM/DD)"
                                 style={{textAlign: "center"}} 
                                 onChange={this.handleChange}/><br/>
-                        <Link to='/flights'>
+                        <Link to='/home/flights'>
                             <input type="submit" value="GO!" style={{width: "535px"}} className="submit-flight-info"/>
                         </Link>
                     </form>
@@ -135,28 +122,29 @@ class HomePage extends Component {
 
     renderFlights = ()=>{
         return (
-            <FlightContainer key={uuid()} state={this.state} handleClick={this.handleClick}/>
+            <div className="home-page">
+                <FlightContainer key={uuid()} state={this.state} handleClick={this.handleClick}/>
+            </div>
         )
     }   
 
 
     renderInfo = (routerProps)=>{
-        return <FlightInfo key={this.state.selectedFlight.flightNumber} {...routerProps} flight={this.state.selectedFlight}/>
+        return(
+            <>
+             <FlightInfo key={this.state.selectedFlight.flightNumber} {...routerProps} flight={this.state.selectedFlight}/>
+            </>
+        )
     }
-
-    
 
     render() {
         // console.log(this.state.airports)
         return (
             <>
-                <NavBar loggedIn={this.state.loggedIn}/>
                 <Switch>
-                    <Route exact path='/home' render={this.renderHomePage} />
-                    <Route path='/signup' render={this.renderSignup} />
-                    <Route path='/login' render={this.renderLogin} />
-                    <Route path='/flights/:flightNumber' render={this.renderInfo} />
-                    <Route path='/flights' render={this.renderFlights} />
+                <Route exact path='/home' render={this.renderHomePage} />
+                <Route exact path='/home/flights' render={this.renderFlights} />
+                <Route exact path='/home/flights/:flightNumber' render={this.renderInfo} />
                 </Switch>
             </>
         );

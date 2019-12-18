@@ -11,6 +11,7 @@ class FlightContainer extends Component {
     }
 
     componentDidMount(){
+        console.log(this.props)
         fetch('http://localhost:4000/api/v1/get_flights', {
             method: "POST",
             headers: {
@@ -53,9 +54,9 @@ class FlightContainer extends Component {
         //     return <FlightInfo key={this.state.selectedFlight.flightNumber} flight={this.state.selectedFlight}/>
         // }
         return (
-            <Switch>
-                <Route path="/flights" render={this.renderFlightList}/>
-            </Switch>
+            <div className='flights-container'>
+                <FlightList flights={this.state.flights} handleClick={this.props.handleClick}/>
+            </div>
         );
     }
 }

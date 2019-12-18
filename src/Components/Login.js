@@ -7,7 +7,7 @@ class Login extends Component{
         password: ""
       }
     
-      handleChange = (event) => {
+    handleChange = (event) => {
         this.setState({
           [event.target.name]: event.target.value
         })
@@ -16,7 +16,7 @@ class Login extends Component{
     handleSubmit = (e) => {
         e.preventDefault()
     
-        fetch("http://localhost:3001/api/v1/login", {
+        fetch("http://localhost:4000/api/v1/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -38,21 +38,24 @@ class Login extends Component{
       }
 
     render(){
+        console.log(this.state)
         return (
             <div className="Login">
-                <form className="login-form">
+                <form className="login-form" onSubmit={this.handleSubmit}>
                     <h2 className="page-title">LOGIN</h2>
                     <input  type="text" 
                             className="username"
                             placeholder="Username" 
                             name="username"
                             value={this.state.username}
+                            onChange={this.handleChange}
                             style={{textAlign: "center"}}/>
                     <input  type="password" 
                             className="password"
                             placeholder="Password"
                             name="password"
                             value={this.state.password}
+                            onChange={this.handleChange}
                             style={{textAlign: "center"}}/><br/><br/><br/>
                     <input  type="submit" value="Submit" />
                 </form>

@@ -60,7 +60,7 @@ class Signup extends Component {
         render(){
                 return (
                 <div className="Sign-up">
-                        <form className="signup-form" onSubmit={this.props.createUser}>
+                        <form className="signup-form" onSubmit={this.handleSubmit}>
                         <h2 className="page-title">SIGN-UP</h2>
                         <input  type="text" 
                                 className="username" 
