@@ -63,9 +63,13 @@ body {
   align-items: center;
   flex-direction: column;
   height: 80vh;
-  width: 22vw;
-  padding-left: 555px;
+  width: 60%;
+  margin: 20%;
+  margin-top: 0;
+  /* padding-left: 555px; */
   text-align: center;
+  background-color: rgba(70, 70, 70, 0.3);
+  border-radius: 15px;
 }
 
 .Login {
@@ -74,8 +78,11 @@ body {
   align-items: center;
   flex-direction: column;
   height: 80vh;
-  width: 22vw;
-  padding-left: 555px;
+  width: 60%;
+  margin: 20%;
+  margin-top: 0;
+  background-color: rgba(70, 70, 70, 0.3);
+  border-radius: 15px;
 }
 
 input {
@@ -108,7 +115,7 @@ input[type=password]::placeholder {
 
 input[type=submit] {
   background: rgba(255,255,255,.2);
-  width: 100%;
+  width: 50%;
   padding: 2vh;
   border: none;
   cursor: pointer;
@@ -332,4 +339,17 @@ header {
   border-radius: 15px;
   width: 400px;
   height: 400px
+}
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+}
+
+.app-name {
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+  font-weight: 800
 }

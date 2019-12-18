@@ -49,7 +49,10 @@ class HomePage extends Component {
         return (
             <div className="home-page">
                 <div className="home-page-logo">
-                    <img src='./images/image.png' alt="meh" />
+                    <div className="banner">
+                        <p className="app-name">UTrippin</p>
+                        <img src='./images/image.png' alt="meh" />
+                    </div>
                     <p className="slogan">Clean. Compact. Convenient.</p>
                 </div><br/><br/>
                 <div className="search-form">
