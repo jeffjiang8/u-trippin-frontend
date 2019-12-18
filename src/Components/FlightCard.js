@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Switch, Route, Link} from 'react-router-dom'
 
 class FlightCard extends Component {
+
+    
     
     render() {
         // console.log("inside fight card", this.props.flight )
@@ -20,7 +22,7 @@ class FlightCard extends Component {
                     <img src='http://localhost:3000/images/arrival.png' alt='meh' className="takingoff" />
                 </div>
                 <div>
-                    <Link to={`/flights/${this.props.flight.flightNumber}`} >
+                    <Link to={`/home/flights/${this.props.flight.flightNumber}`} >
                 {/*onClick={()=>this.props.handleClick(this.props.flight)}> */}
                         <button className="button detail-button"
                                 style={{height: '23px'}}
