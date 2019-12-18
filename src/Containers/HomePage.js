@@ -3,8 +3,8 @@ import uuid from 'react-uuid'
 import NavBar from './NavBar'
 import Login from '../Components/Login'
 import Signup from '../Components/Signup'
+import FlightInfo from '../Components/FlightInfo'
 import FlightContainer from './FlightContainer'
-import Airports from '../Components/Airports'
 import { Switch, Route, Link } from 'react-router-dom'
 class HomePage extends Component {
 
@@ -12,11 +12,11 @@ class HomePage extends Component {
         origin: '',
         destination: '',
         date: '',
-        API_ID: process.env.REACT_APP_API_ID,
-        API_KEY: process.env.REACT_APP_API_KEY,
-        API_KEY_2: process.env.REACT_APP_CITY_API_KEY,
         currentUser: null,
-        cityName: ''
+        cityName: '',
+        selectedFlight: {},
+        airports: null,
+        searched: false
     }
 
     setUser = (user)=>{
@@ -43,12 +43,6 @@ class HomePage extends Component {
 
     handleSubmit = (e)=>{
         e.preventDefault()
-    }
-
-    handleSearch = (cityName)=>{
-        fetch(`http://aviation-edge.com/v2/public/autocomplete?key=${this.state.API_KEY_2}&city=${cityName}`)
-        .then(resp=>resp.json())
-        .then(data=>console.log(data))
     }
 
     renderHomePage = ()=>{
@@ -88,34 +82,69 @@ class HomePage extends Component {
                                 className="city"
                                 name="cityName"
                                 placeholder="Look For Your Airport"
+                                value={this.state.cityName}
                                 onChange={this.handleChange}
                                 style={{textAlign: "center"}} />
                 </div>
                 <div>
-                    <button className="button" style={{'fontWeight': '800'}} onClick={()=>{this.handleSearch(this.state.cityName)}}>
+                    <button className="button" style={{'fontWeight': '800'}} onClick={this.handleSearch}>
                         <span data-title="SEARCH">READY?</span>
                     </button>
+                </div>
+                <div className="airport-result">
+                    
+                        {this.state.searched
+                        ?
+                            this.state.airports === undefined
+                            ?
+                            "Please Try Again!"
+                            :
+                            this.state.airports.map(airport=><p>{airport.codeIataAirport} | {airport.nameAirport}</p>)
+                        :
+                        ""
+                        }
+                    
                 </div>
             </div>
         )
     }
 
-    renderAiports = ()=>{
-        return (
-            <Airports key={uuid()} city={this.state.cityName} apiKey={this.state.API_KEY_2} />
-        )
-    } 
+    handleSearch = ()=>{
+        fetch('http://localhost:4000/api/v1/get_airports', {
+            method: "POST",
+            headers: {
+                'content-type': "application/json",
+                'accepts': 'application/json'
+            },
+            body: JSON.stringify({
+                city_name: this.state.cityName
+            })
+        })
+        .then(resp=>resp.json())
+        .then(data=>this.setState({airports: data.airportsByCities, searched: true})) 
+    }
+
+    handleClick = (flight)=>{
+        this.setState({
+            selectedFlight: flight
+        })
+    }
 
     renderFlights = ()=>{
         return (
-            <FlightContainer key={uuid()} state={this.state}/>
+            <FlightContainer key={uuid()} state={this.state} handleClick={this.handleClick}/>
         )
     }   
+
+
+    renderInfo = (routerProps)=>{
+        return <FlightInfo key={this.state.selectedFlight.flightNumber} {...routerProps} flight={this.state.selectedFlight}/>
+    }
 
     
 
     render() {
-        // console.log(this.state.API_KEY_2)
+        // console.log(this.state.airports)
         return (
             <>
                 <NavBar loggedIn={this.state.loggedIn}/>
@@ -123,6 +152,7 @@ class HomePage extends Component {
                     <Route exact path='/home' render={this.renderHomePage} />
                     <Route path='/signup' render={this.renderSignup} />
                     <Route path='/login' render={this.renderLogin} />
+                    <Route path='/flights/:flightNumber' render={this.renderInfo} />
                     <Route path='/flights' render={this.renderFlights} />
                 </Switch>
             </>

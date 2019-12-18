@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import FlightList from './FlightList'
-import FlightInfo from '../Components/FlightInfo'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
 
 class FlightContainer extends Component {
 
     state = {
         flights: [],
-        selectedFlight: [],
-        loading: true
+        loading: true,
+        updated:false
     }
 
     componentDidMount(){
@@ -31,34 +30,30 @@ class FlightContainer extends Component {
         })) 
     }
 
-    handleClick = (flight)=>{
-        console.log(flight)
-        this.setState({
-            selectedFlight: flight
-        })
-    }
+    
 
     renderFlightList = ()=>{
         return (
             <div className='flights-container'>
-                <FlightList flights={this.state.flights} handleClick={this.handleClick}/>
+                <FlightList flights={this.state.flights} handleClick={this.props.handleClick}/>
             </div>
         )
     }
 
-    renderInfo = ()=>{
-        return <FlightInfo key={this.state.selectedFlight.flightNumber} flight={this.state.selectedFlight}/>
-    }
+    
 
     render() {
-        console.log(this.state.selectedFlight)
+        // console.log(this.state.flights)
+        // console.log("inside render", this.state)
         if(this.state.loading){
             return <h1>loading...</h1>
         }
-
+        // if(this.state.updated){
+        //     console.log(this.state.selectedFlight)
+        //     return <FlightInfo key={this.state.selectedFlight.flightNumber} flight={this.state.selectedFlight}/>
+        // }
         return (
             <Switch>
-                <Route path='/flights/:flightNumber' render={this.renderInfo} />
                 <Route path="/flights" render={this.renderFlightList}/>
             </Switch>
         );

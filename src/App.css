@@ -127,7 +127,7 @@ input[type=submit]:active {
 
 .navbar {
   display: flex;
-  height: 30px;
+  height: 25px;
   justify-content: space-between;
   z-index: 1;
   width: 95vw;
@@ -240,11 +240,8 @@ input:focus::placeholder{
   flex-direction: row;
   justify-content: space-evenly;
   width: 60vw;
-  
   align-content: center;
   align-items: flex-start;
-  
-  
 }
 
 .flight-card{
@@ -272,7 +269,6 @@ input:focus::placeholder{
 .flights-container {
   display: flex;
   justify-content: center;
-  
 }
 
 .landing {
@@ -289,6 +285,51 @@ input:focus::placeholder{
 
 header {
   z-index: 1;
-  height: 8vh;
+  height: 10vh;
 }
 
+.airport-result {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  font-weight: 800;
+}
+
+.flight-info {
+  background-color: rgba(70, 70, 70, 0.3);
+  display: flex;
+  margin: 100px;
+  border-radius: 15px;
+  flex-direction: column;
+  margin-top: 15px;
+  width: 70%;
+  margin-left: 15%;
+  
+}
+
+.info{
+  text-align: left;
+  font-weight: 800;
+  margin: 100px;
+  z-index: 5;
+}
+
+.book-btn {
+  margin-bottom: 70px;
+  margin-top: -40px
+}
+
+.info-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  background-color: rgba(70, 70, 70, 0.3);
+  border-radius: 15px;
+  width: 400px;
+  height: 400px
+}

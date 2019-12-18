@@ -20,11 +20,13 @@ class FlightCard extends Component {
                 </div>
                 <div>
                     <Link to={`/flights/${this.props.flight.flightNumber}`} >
+                {/*onClick={()=>this.props.handleClick(this.props.flight)}> */}
                         <button className="button detail-button"
                                 style={{height: '23px'}}
                                 style={{'font-size': '22px'}}
                                 style={{'fontWeight': '800'}}
-                                onClick={()=>this.props.handleClick(this.props.flight)}>
+                                onClick={()=>this.props.handleClick(this.props.flight)}
+                                >
                             <span data-title="DETAILS"></span>
                         </button>
                     </Link>
@@ -34,8 +36,10 @@ class FlightCard extends Component {
     }
 
     render() {
+        // console.log("inside fight card", this.props.flight )
         return(
             <Switch>
+                <Route path='/flights/:flightNumber'/>
                 <Route exact path='/flights' render={this.renderTickets} />
             </Switch>
         )
