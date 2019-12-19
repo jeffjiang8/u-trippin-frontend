@@ -32,7 +32,32 @@ class FlightInfo extends Component {
     //     .then(data=>this.setState({weather: data.data[0], clicked: true}))
     // }
 
+    book = ()=>{
+        if (localStorage.user_id === null) {
+            return window.alert("Please Sign Up / Login!")
+        }else{
+            fetch('http://localhost:4000/api/v1/trips', {
+                method: "POST",
+                headers: {
+                    'content-type': "application/json",
+                    "accpets": "application/json"
+                },
+                body: JSON.stringify({
+                    name: this.props.flight.arrivalAirportFsCode,
+                    flight_id: this.props.flight.flightNumber,
+                    user_id: localStorage.user_id
+                })
+            })
+            .then(resp=>resp.json())
+            .then(console.log)
+        }
+    }
+
     render() {
+        if (this.props.flight === undefined && departureTime === undefined && arrivalTime === undefined){
+            return <Redirect to='/home' />
+        }
+
         const { carrierFsCode, 
                 flightNumber, 
                 departureAirportFsCode, 
@@ -45,10 +70,6 @@ class FlightInfo extends Component {
 
         const departing = departureTime.replace(/[-T]/g, ' / ')
         const arriving = arrivalTime.replace(/[-T]/g, ' / ')
-
-        if (this.props.flight === undefined && departureTime === undefined && arrivalTime === undefined){
-            return <Redirect to='/home' />
-        }
         
         return (
             <>
@@ -57,22 +78,31 @@ class FlightInfo extends Component {
                     <div className="flight-info">
                         <div className="info-body">
                             <div className="info">
-                                <p>From: {departureAirportFsCode}</p>
-                                <p>Terminal: {departureTerminal}</p>
-                                <p>Departing: {departing.split('').slice(0,22)}</p><br/><br/>
-                                <p>Carrier: {carrierFsCode}</p>
-                                <p>Flight Number: {flightNumber}</p>
-                                <p>Stops: {stops}</p><br/><br/>
-                                <p>To: {arrivalAirportFsCode}</p>
-                                <p>Terminal: {arrivalTerminal}</p>
-                                <p>Arriving: {arriving.split('').slice(0,22)}</p>
+                                <p className="info-detail">From: {departureAirportFsCode}</p>
+                                <p className="info-detail">Terminal: {departureTerminal}</p>
+                                <p className="info-detail">Departing: {departing.split('').slice(0,22)}</p><br/><br/>
+                                <p className="info-detail">Carrier: {carrierFsCode}</p>
+                                <p className="info-detail">Flight Number: {flightNumber}</p>
+                                <p className="info-detail">Stops: {stops}</p><br/><br/>
+                                <p className="info-detail">To: {arrivalAirportFsCode}</p>
+                                <p className="info-detail">Terminal: {arrivalTerminal}</p>
+                                <p className="info-detail">Arriving: {arriving.split('').slice(0,22)}</p>
                             </div>
                             
                                 {<WeatherInfo state={this.state} />}
                             
                         </div>
                         <div className="book-btn">
-                            <button>Book</button>
+                            {
+                                this.props.loggedIn
+                                ?
+                                <Link to={`/home/${this.props.currentUser.username}`}>
+                                    <button onClick={this.book}>Book</button>
+                                </Link>
+                                :
+                                ''
+                            }
+                            
                         </div>
                     </div>
                         <Link to='/home/flights'>

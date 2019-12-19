@@ -3,7 +3,7 @@ import uuid from 'react-uuid'
 import FlightInfo from '../Components/FlightInfo'
 import FlightContainer from './FlightContainer'
 import UserContainer from './UserContainer'
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, Redirect } from 'react-router-dom'
 class HomePage extends Component {
 
     state={
@@ -12,12 +12,10 @@ class HomePage extends Component {
         date: '',
         
         cityName: '',
-        selectedFlight: {},
+        selectedFlight: null,
         airports: null,
         searched: false
     }
-
-    
 
     handleChange = (e)=>{
         let name = e.target.name
@@ -37,7 +35,7 @@ class HomePage extends Component {
                 <div className="home-page-logo">
                     <div className="banner">
                         <p className="app-name">UTrippin</p>
-                        <img src='./images/image.png' alt="meh" />
+                        <img src='http://localhost:3000/images/image.png' alt="meh" />
                     </div>
                     <p className="slogan">Clean. Compact. Convenient.</p>
                 </div><br/><br/>
@@ -128,9 +126,12 @@ class HomePage extends Component {
     }   
 
     renderInfo = (routerProps)=>{
+        if (this.state.selectedFlight === null){
+            return <Redirect to="/home" />
+        }
         return(
             <>
-             <FlightInfo key={this.state.selectedFlight.flightNumber} {...routerProps} flight={this.state.selectedFlight}/>
+             <FlightInfo key={this.state.selectedFlight.flightNumber} {...routerProps} flight={this.state.selectedFlight} loggedIn={this.props.loggedIn} currentUser={this.props.currentUser}/>
             </>
         )
     }
@@ -144,10 +145,10 @@ class HomePage extends Component {
         return (
             <>
                 <Switch>
-                <Route exact path='/home' render={this.renderHomePage} />
-                <Route exact path='/home/flights' render={this.renderFlights} />
-                <Route exact path='/home/flights/:flightNumber' render={this.renderInfo} />
-                <Route path='/:username' render={this.renderUserPage} />
+                    <Route exact path='/home' render={this.renderHomePage} />
+                    <Route exact path='/home/flights' render={this.renderFlights} />
+                    <Route exact path='/home/flights/:flightNumber' render={this.renderInfo} />
+                    <Route exact path='/home/:username' render={this.renderUserPage} />
                 </Switch>
             </>
         );

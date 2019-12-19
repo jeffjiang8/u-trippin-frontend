@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {Switch, Route, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class FlightCard extends Component {
-
-    
-    
     render() {
-        // console.log("inside fight card", this.props.flight )
         const { arrivalAirportFsCode, departureAirportFsCode, departureTime } = this.props.flight
         const formatedDate = departureTime.replace(/[-T]/g, ' / ')
         return( 
@@ -23,7 +19,6 @@ class FlightCard extends Component {
                 </div>
                 <div>
                     <Link to={`/home/flights/${this.props.flight.flightNumber}`} >
-                {/*onClick={()=>this.props.handleClick(this.props.flight)}> */}
                         <button className="button detail-button"
                                 style={{height: '23px'}}
                                 style={{'font-size': '22px'}}

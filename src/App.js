@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import FlightInfo from './Components/FlightInfo'
-import FlightContainer from './Containers/FlightContainer'
 import HomePage from './Containers/HomePage'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
@@ -72,13 +70,11 @@ class App extends Component {
   
 
   render(){
-    console.log(this.state.currentUser)
   return (
     <div className="App">
       <NavBar loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} handleClick={this.handleClick}/>
-      <HomePage />
+      <HomePage loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>
       <Switch>
-        
         <Route path='/signup' render={this.renderSignup} />
         <Route path='/login' render={this.renderLogin} />
       </Switch>

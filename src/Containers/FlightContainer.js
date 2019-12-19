@@ -11,7 +11,6 @@ class FlightContainer extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
         fetch('http://localhost:4000/api/v1/get_flights', {
             method: "POST",
             headers: {
