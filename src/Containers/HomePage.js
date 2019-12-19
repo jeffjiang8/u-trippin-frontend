@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import uuid from 'react-uuid'
 import FlightInfo from '../Components/FlightInfo'
 import FlightContainer from './FlightContainer'
-import Login from '../Components/Login'
-import Signup from '../Components/Signup'
+import UserContainer from './UserContainer'
 import { Switch, Route, Link } from 'react-router-dom'
 class HomePage extends Component {
 
@@ -128,13 +127,16 @@ class HomePage extends Component {
         )
     }   
 
-
     renderInfo = (routerProps)=>{
         return(
             <>
              <FlightInfo key={this.state.selectedFlight.flightNumber} {...routerProps} flight={this.state.selectedFlight}/>
             </>
         )
+    }
+
+    renderUserPage = ()=>{
+        return <UserContainer />
     }
 
     render() {
@@ -145,6 +147,7 @@ class HomePage extends Component {
                 <Route exact path='/home' render={this.renderHomePage} />
                 <Route exact path='/home/flights' render={this.renderFlights} />
                 <Route exact path='/home/flights/:flightNumber' render={this.renderInfo} />
+                <Route path='/:username' render={this.renderUserPage} />
                 </Switch>
             </>
         );

@@ -8,6 +8,7 @@ import Signup from './Components/Signup'
 import UserContainer from './Containers/UserContainer'
 import NavBar from './Containers/NavBar'
 import {Route, Switch} from 'react-router-dom'
+import { resolveNaptr } from 'dns';
 
 class App extends Component {
 
@@ -16,18 +17,48 @@ class App extends Component {
     loggedIn: false
   }
 
+  componentDidMount(){
+    const user_id = localStorage.user_id
+
+    if (user_id){
+      fetch('http://localhost:4000/api/v1/auto_login', {
+        headers: {
+          "Authorization": user_id
+        }
+      })
+      .then(resp=>resp.json())
+      .then(response=>{
+        if (response.errors){
+          alert(response.errors)
+        }else{
+          this.setState({
+            currentUser: response,
+            loggedIn: true
+          })
+        }
+      })
+    }
+  }
+
   handleClick = ()=>{
     this.setState({
       currentUser: null,
       loggedIn: false
-    }, ()=>{this.props.history.push('/home')})
+    }, ()=>{
+      localStorage.removeItem("user_id")
+      // localStorage.user_id = null
+      this.props.history.push('/home')
+    })
   }
 
   setUser = (user)=>{
     this.setState({
         currentUser: user,
         loggedIn: true
-    }, ()=>{this.props.history.push('/home')})
+    }, ()=>{
+      localStorage.user_id = user.id
+      this.props.history.push('/home')
+    })
   }
 
   renderLogin = ()=>{
@@ -40,22 +71,16 @@ class App extends Component {
 
   
 
-  // renderUserPage = ()=>{
-  //   return <UserContainer loggedIn={this.state.loggedIn}/>
-  // }
-
   render(){
     console.log(this.state.currentUser)
   return (
     <div className="App">
-      <NavBar loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} loggedIn={this.state.loggedIn}/>
+      <NavBar loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} handleClick={this.handleClick}/>
       <HomePage />
       <Switch>
         
         <Route path='/signup' render={this.renderSignup} />
         <Route path='/login' render={this.renderLogin} />
-        
-        <Route path='/:username' render={this.renderUserPage} />
       </Switch>
     </div>
   )
