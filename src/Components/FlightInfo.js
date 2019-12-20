@@ -33,6 +33,9 @@ class FlightInfo extends Component {
     // }
 
     book = ()=>{
+        const parsedYear = this.props.flight.departureTime.slice(0,4)
+        const parsedMonth = this.props.flight.departureTime.slice(5,7)
+        const parsedDay = this.props.flight.departureTime.slice(8,10)
         if (localStorage.user_id === null) {
             return window.alert("Please Sign Up / Login!")
         }else{
@@ -44,6 +47,10 @@ class FlightInfo extends Component {
                 },
                 body: JSON.stringify({
                     name: this.props.flight.arrivalAirportFsCode,
+                    carrier: this.props.flight.carrierFsCode,
+                    year: parsedYear,
+                    month: parsedMonth,
+                    day: parsedDay,
                     flight_id: this.props.flight.flightNumber,
                     user_id: localStorage.user_id
                 })
