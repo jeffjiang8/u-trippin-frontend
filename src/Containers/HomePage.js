@@ -136,19 +136,19 @@ class HomePage extends Component {
         )
     }
 
-    renderUserPage = ()=>{
-        return <UserContainer />
-    }
+    // renderUserPage = ()=>{
+    //     return <UserContainer currentUser={this.state.currentUser}/>
+    // }
 
     render() {
-        // console.log(this.state.airports)
+        // console.log(this.props)
         return (
             <>
                 <Switch>
                     <Route exact path='/home' render={this.renderHomePage} />
                     <Route exact path='/home/flights' render={this.renderFlights} />
                     <Route exact path='/home/flights/:flightNumber' render={this.renderInfo} />
-                    <Route exact path='/home/:username' render={this.renderUserPage} />
+                    {/* <Route exact path='/home/:username' render={this.renderUserPage} /> */}
                 </Switch>
             </>
         );

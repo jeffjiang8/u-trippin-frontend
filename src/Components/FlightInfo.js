@@ -43,7 +43,8 @@ class FlightInfo extends Component {
                 method: "POST",
                 headers: {
                     'content-type': "application/json",
-                    "accpets": "application/json"
+                    "accpets": "application/json",
+                    "Authorization": localStorage.user_id
                 },
                 body: JSON.stringify({
                     name: this.props.flight.arrivalAirportFsCode,
@@ -52,7 +53,6 @@ class FlightInfo extends Component {
                     month: parsedMonth,
                     day: parsedDay,
                     flight_id: this.props.flight.flightNumber,
-                    user_id: localStorage.user_id
                 })
             })
             .then(resp=>resp.json())

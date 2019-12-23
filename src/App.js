@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
 import HomePage from './Containers/HomePage'
+import UserContainer from './Containers/UserContainer'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
-import UserContainer from './Containers/UserContainer'
 import NavBar from './Containers/NavBar'
 import {Route, Switch} from 'react-router-dom'
-import { resolveNaptr } from 'dns';
 
 class App extends Component {
 
@@ -67,7 +66,9 @@ class App extends Component {
       return <Signup setUser={this.setUser} />
   }
 
-  
+  renderUserPage = ()=>{
+    return <UserContainer currentUser={this.state.currentUser} />
+  }
 
   render(){
   return (
@@ -77,6 +78,7 @@ class App extends Component {
       <Switch>
         <Route path='/signup' render={this.renderSignup} />
         <Route path='/login' render={this.renderLogin} />
+        <Route exact path='/home/:username' render={this.renderUserPage} />
       </Switch>
     </div>
   )
