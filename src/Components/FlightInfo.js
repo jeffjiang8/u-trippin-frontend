@@ -7,7 +7,6 @@ class FlightInfo extends Component {
     state = {
         arrivalLatitude: null,
         arrivalLongitude: null,
-        weather: '',
         clicked: false
     }
 
@@ -26,16 +25,11 @@ class FlightInfo extends Component {
         .then(data=>this.setState({arrivalLatitude: data.airports[0].latitude, arrivalLongitude: data.airports[0].longitude}))
     }
 
-    // handleClick = ()=>{
-    //     fetch(`https://api.weatherbit.io/v2.0/current?&lat=${this.state.arrivalLatitude}&lon=${this.state.arrivalLongitude}&key=${process.env.REACT_APP_WEATHER_API_KEY}`)
-    //     .then(resp=>resp.json())
-    //     .then(data=>this.setState({weather: data.data[0], clicked: true}))
-    // }
-
     book = ()=>{
         const parsedYear = this.props.flight.departureTime.slice(0,4)
         const parsedMonth = this.props.flight.departureTime.slice(5,7)
         const parsedDay = this.props.flight.departureTime.slice(8,10)
+        const parsedTime = this.props.flight.departureTime.slice(11,16)
         if (localStorage.user_id === null) {
             return window.alert("Please Sign Up / Login!")
         }else{
@@ -48,19 +42,22 @@ class FlightInfo extends Component {
                 },
                 body: JSON.stringify({
                     name: this.props.flight.arrivalAirportFsCode,
+                    from: this.props.flight.departureAirportFsCode,
                     carrier: this.props.flight.carrierFsCode,
                     year: parsedYear,
                     month: parsedMonth,
                     day: parsedDay,
+                    time: parsedTime,
                     flight_id: this.props.flight.flightNumber,
                 })
             })
             .then(resp=>resp.json())
-            .then(console.log)
+            .then(this.setState({clicked: true}))
         }
     }
 
     render() {
+        console.log(this.props.flight.departureTime)
         if (this.props.flight === undefined && departureTime === undefined && arrivalTime === undefined){
             return <Redirect to='/home' />
         }
@@ -103,9 +100,9 @@ class FlightInfo extends Component {
                             {
                                 this.props.loggedIn
                                 ?
-                                <Link to={`/home/${this.props.currentUser.username}`}>
+                                
                                     <button onClick={this.book}>Book</button>
-                                </Link>
+                                // </Link>
                                 :
                                 ''
                             }
@@ -118,8 +115,24 @@ class FlightInfo extends Component {
                 </>
                 :
                 <h1>Loading...</h1>
-                
                 }
+                {
+                    this.state.clicked?
+                    <div className="select-path">
+                        <p>Success...</p>
+                        <div className="path-btns">
+                            <Link to={`/home/${this.props.currentUser.username}`}>
+                                <button>DashBoard</button>
+                            </Link>
+                            <Link to='/home' >
+                                <button>Book Another Flight</button>
+                            </Link>
+                        </div>
+                    </div>
+                    :
+                    ""
+                }
+                
             </>
         )
     }

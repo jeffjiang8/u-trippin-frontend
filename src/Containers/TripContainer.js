@@ -3,10 +3,10 @@ import TripList from './TripList'
 
 class TripContainer extends Component {
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div className="trip-container">
-                <TripList trips={this.props.trips} handleClick={this.props.handleClick}/>
+                <TripList trips={this.props.trips} handleClick={this.props.handleClick} currentUser={this.props.currentUser}/>
             </div>
         );
     }

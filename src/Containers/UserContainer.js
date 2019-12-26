@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import TirpContainer from './TripContainer'
+import TripInfo from './TripInfo'
+import {Route, Switch} from 'react-router-dom'
 
 class UserContainer extends Component {
 
     state = {
         myTrips: [],
         loading: true,
-        selectedTrip: null
     }
 
     componentDidMount(){
         fetch('http://localhost:4000/api/v1/trips')
         .then(resp=>resp.json())
-        .then(data=>this.setState({myTrips: data.filter(data=>data.user_id === localStorage.user_id), loading: false}))
+        .then(data=>this.setState({myTrips: data.filter(data=>data.user_id === localStorage.user_id).reverse(), loading: false}))
     }
 
-    handleClick = (trip)=>{
-        this.setState({
-            selectedTrip: trip
-        })
+    renderTripContainer = ()=>{
+        return <TirpContainer trips={this.state.myTrips} handleClick={this.props.handleClick} currentUser={this.props.currentUser}/>
+    }
+
+    renderTripInfo = ()=>{
+        return <TripInfo trip={this.props.selectedTrip}/>
     }
 
     render() {
@@ -29,7 +32,9 @@ class UserContainer extends Component {
         }
         return (
             <div className="user-container">
-               <TirpContainer trips={this.state.myTrips} handleClick={this.handleClick} currentUser={this.props.currentUser}/>
+               <Switch>
+                   <Route path='/home/:username' render={this.renderTripContainer}/>
+               </Switch>
             </div>
         );
     }

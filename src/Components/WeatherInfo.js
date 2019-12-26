@@ -5,7 +5,6 @@ class WeatherInfo extends Component {
     state = {
         weather: '',
         loading: true,
-        img_url: ''
     }
 
     componentDidMount(){

@@ -222,10 +222,7 @@ input:focus::placeholder{
 	padding: 0;
 	border: 0px none;
   border-radius: 15px;
-  
-  
   -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.3)));
-  
 }
 .button span{
 	display: block;
@@ -291,7 +288,6 @@ input:focus::placeholder{
   border-radius: 15px;
 }
 
-
 .landing {
   width: 40px;
 }
@@ -323,7 +319,7 @@ header {
   margin-top: 15px;
   width: 70%;
   margin-left: 15%;
-  height: 82vh
+  height: 77vh;
 }
 
 .info{
@@ -383,7 +379,7 @@ img.background-img {
   z-index: -1;
   padding-top: 424px;
   display: block;
-  opacity: 0.7
+  opacity: 0.7;
 }
 
 div.weather-details{
@@ -463,4 +459,119 @@ li {
   margin-top: 10px
 }
 
+div.select-path {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  bottom: 380px;
+  overflow:hidden;
+  height:10vh;
+  background-color: rgba(70, 70, 70, 0.7);
+  z-index: 5000;
+  width: 50%;
+  margin-left: 25%;
+  border-radius: 15px;
+}
 
+.greeting {
+  height: 0.8vh;
+  text-align: left;
+  width: 60%;
+  margin-left: 15%;
+  margin-bottom: 40px
+}
+
+.trip-detail {
+  display: flex;
+  flex-direction: column;
+  height: 77vh;
+  width: 60%;
+  margin-left: 20%;
+  justify-content: center;
+  margin-top: 0
+}
+
+.detail-title {
+  margin: 0;
+  text-align: left;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.top-divider {
+  margin: 1px;
+  text-align: left;
+  font-weight: 800;
+  border: 1px solid white;
+  margin-bottom: 20px;
+}
+
+.bottom-divider {
+  margin: 1px;
+  text-align: left;
+  font-weight: 800;
+  border: 1px solid white;
+}
+
+.trip-flight-detail {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  margin-bottom: 0;
+}
+
+.pack-list-container {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  margin-top: 0;
+}
+
+.trip-flight-detail-list {
+  text-align: left;
+  font-weight: 800;
+  font-size: 22px;
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.trip-weather-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  background-color: rgba(70, 70, 70, 0.3);
+  border-radius: 15px;
+  width: 500px;
+  height: 300px;
+  overflow: hidden;
+  justify-content: space-evenly;
+}
+
+.trip-weather-background {
+  display: flex;
+  width: 500px;
+  justify-content: center;
+  position: relative;
+  bottom: 70px;
+}
+
+.weather-detail-list {
+  margin: 0;
+  font-size: 15px
+}
+
+div.trip-weather-details{
+  display: flex;
+  position:relative;
+  bottom: 380px;
+  font-weight: 800;
+  justify-content: center;
+}
+
+.weather-detail-list {
+  margin: 0;
+}
