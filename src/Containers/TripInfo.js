@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link, Redirect} from 'react-router-dom'
 import TripWeatherInfo from '../Components/TripWeatherInfo';
+import PackListContainer from './PackListContainer'
 
 
 class TripInfo extends Component {
@@ -30,7 +31,7 @@ class TripInfo extends Component {
 
     render() {
         
-        // console.log(this.props)
+        console.log(this.props)
         if (this.props.trip === null) {
             return <Redirect to='/home/' />
         }
@@ -81,6 +82,7 @@ class TripInfo extends Component {
                         <div className="section-div">
                             <p className="detail-title">Pack List</p>
                             <div className="bottom-divider"></div>
+                            { <PackListContainer trip={this.props.trip}/>}
                         </div>
                     </div>
                 </div>
