@@ -37,7 +37,7 @@ class TripWeatherInfo extends Component {
                     temp} = this.state.weather
     
             return (
-                <div className="trip-weather-info">
+                <>
                     <div className="trip-weather-background">
                         <BackgroundImg query={this.state.weather.city_name}/>
                     </div>
@@ -59,7 +59,7 @@ class TripWeatherInfo extends Component {
                             <li className="weather-detail-list">Precipitation: {precip}mm</li>
                         </ul>
                     </div>
-                </div>
+                </>
         );
     }
 }

@@ -7,8 +7,7 @@ import PackListContainer from './PackListContainer'
 class TripInfo extends Component {
 
     state = {
-        airport: null,
-        clicked: false
+        airport: null
     }
 
     componentDidMount(){
@@ -82,7 +81,7 @@ class TripInfo extends Component {
                         <div className="section-div">
                             <p className="detail-title">Pack List</p>
                             <div className="bottom-divider"></div>
-                            { <PackListContainer trip={this.props.trip}/>}
+                            { <PackListContainer key={this.props.trip.id} trip={this.props.trip}/>}
                         </div>
                     </div>
                 </div>

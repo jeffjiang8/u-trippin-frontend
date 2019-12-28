@@ -494,7 +494,7 @@ div.select-path {
 .detail-title {
   margin: 0;
   text-align: left;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 800;
 }
 
@@ -524,13 +524,13 @@ div.select-path {
   display: flex;
   flex-direction: column;
   height: 50%;
-  margin-top: 0;
+  margin-top: 10px;
 }
 
 .trip-flight-detail-list {
   text-align: left;
   font-weight: 800;
-  font-size: 22px;
+  font-size: 15px;
 }
 
 .detail-container {
@@ -542,13 +542,13 @@ div.select-path {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: auto;
   background-color: rgba(70, 70, 70, 0.3);
   border-radius: 15px;
   width: 500px;
-  height: 300px;
+  height: 250px;
   overflow: hidden;
   justify-content: space-evenly;
+  margin-top: -5px
 }
 
 .trip-weather-background {
@@ -561,7 +561,7 @@ div.select-path {
 
 .weather-detail-list {
   margin: 0;
-  font-size: 15px
+  font-size: 12px
 }
 
 div.trip-weather-details{
