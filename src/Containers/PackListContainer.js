@@ -49,12 +49,12 @@ class PackListContainer extends Component {
                         ?
                         <div className="item-form">
                             <form>
-                                <input type="text" name="itemName" placeholder="Item Name" onChange={this.handleChange}></input>
+                                <input type="text" name="itemName" placeholder="Item Name" onChange={this.handleChange} />
                                 <select onChange={this.handleChange} name='itemCategory'>
                                     <option default>Select</option>
                                     {this.state.categories.map(category=><option value={category.name} id={category.id}>{category.name}</option>)}
                                 </select>
-                                {/* <input type="submit">Submit</input> */}
+                                <input type="submit" value="Submit"/>
                             </form>
                         </div>
                         :
