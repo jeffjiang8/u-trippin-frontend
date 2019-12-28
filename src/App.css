@@ -575,3 +575,23 @@ div.trip-weather-details{
 .weather-detail-list {
   margin: 0;
 }
+
+.item-form {
+  display: flex;
+  flex-direction: column;
+  width: 18vw;
+  height: 15vh;
+  background-color: rgba(70, 70, 70, 0.3);
+  border-radius: 15px;
+  position: relative;
+}
+
+input.item-input {
+  width: 15vw;
+  text-align: center
+}
+
+input.item-submit {
+  width: 15vw;
+  height: 5vh;
+}
