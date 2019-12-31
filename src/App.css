@@ -484,7 +484,7 @@ div.select-path {
 .trip-detail {
   display: flex;
   flex-direction: column;
-  height: 77vh;
+  height: 82vh;
   width: 60%;
   margin-left: 20%;
   justify-content: center;
@@ -516,15 +516,18 @@ div.select-path {
 .trip-flight-detail {
   display: flex;
   flex-direction: column;
-  height: 50%;
+  height: 100%;
   margin-bottom: 0;
 }
 
 .pack-list-container {
   display: flex;
   flex-direction: column;
-  height: 50%;
+  height: 100%;
   margin-top: 10px;
+  justify-content: left;
+  overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .trip-flight-detail-list {
@@ -581,17 +584,58 @@ div.trip-weather-details{
   flex-direction: column;
   width: 18vw;
   height: 15vh;
-  background-color: rgba(70, 70, 70, 0.3);
+  background-color: rgba(70, 70, 70, 0.8);
   border-radius: 15px;
   position: relative;
+  left: 300px;
+  bottom: 220px;
+  justify-content: space-around;
+  margin: 0;
+  flex-wrap: wrap
 }
 
 input.item-input {
-  width: 15vw;
-  text-align: center
+  width: 8vw;
+  text-align: center;
+  height: 2vh;
 }
 
 input.item-submit {
   width: 15vw;
   height: 5vh;
+  margin-bottom: 0
+}
+
+.add-item {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  background-color: rgba(70, 70, 70, 0.3);
+  justify-content: center;
+  border-style: dashed;
+  position: relative;
+  border-radius: 15px;
+  height: 15px
+}
+
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 30px);
+}
+
+.form-title {
+  margin: 0;
+  font-weight: 800
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 200px;
+  background-color: rgba(70, 70, 70, 0.3);
+  border-radius: 15px;
+  height: 20px;
+  font-weight: 800;
 }

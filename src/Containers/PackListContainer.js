@@ -18,7 +18,13 @@ class PackListContainer extends Component {
 
         fetch('http://localhost:4000/api/v1/items')
         .then(resp=>resp.json())
-        .then(items=>this.setState({myItems: items.filter(item=>item.user_id === localStorage.user_id )}))
+        .then(items=>this.setState({myItems: items.filter(item=>{
+            // console.log(this.props.trip.id.toString())
+            return(
+            item.user_id === localStorage.user_id && 
+            item.trip_id === this.props.trip.id.toString()
+            )
+        })}))
     }
 
     handleBtnClick = ()=>{
@@ -32,23 +38,56 @@ class PackListContainer extends Component {
             [name]: value
         })
     }
+
+    handleSelectChange = (e) => {
+        e.persist()
+        this.setState({
+            itemCategory: e.target.selectedIndex
+        })
+    }
+
+    handleSubmit = (e)=>{
+        e.preventDefault()
+        fetch('http://localhost:4000/api/v1/items', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                "accepts": "application/json"
+            },
+            body: JSON.stringify({
+                trip_id: this.props.trip.id,
+                category_id: this.state.itemCategory,
+                name: this.state.itemName,
+                packed: false,
+                user_id: localStorage.user_id
+            })
+        })
+        .then(resp=>resp.json())
+        .then(data=>this.setState({
+            myItems: [...this.state.myItems, data],
+            clicked: false
+        }))
+    }
     
     render() {
-        console.log(this.state.itemName, this.state.itemCategory)
+        console.log(this.state.myItems)
         return (
-            <div className="pack-list-container">
-                {   this.state.myItems !== null
-                    ?
-                    <ItemContainer myItems={this.state.myItems} trip={this.props.trip}/>
-                    :
-                    ""
-                }
+            <>
+                <div className="pack-list-container">
+                    {   this.state.myItems !== null
+                        ?
+                        <ItemContainer myItems={this.state.myItems} trip={this.props.trip} handleBtnClick={this.handleBtnClick}/>
+                        :
+                        ""
+                    }
+                </div>
                 {   this.state.categories !== null
                     ?
                         this.state.clicked
                         ?
                         <div className="item-form">
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
+                                <p className="form-title">Add Item</p>
                                 <input  type="text" 
                                         name="itemName" 
                                         placeholder="Item Name" 
@@ -56,21 +95,21 @@ class PackListContainer extends Component {
                                         className="item-input"
                                         />
                                 <select 
-                                        onChange={this.handleChange} 
+                                        onChange={this.handleSelectChange} 
                                         name='itemCategory'>
                                     <option default>Select</option>
                                     {this.state.categories.map(category=><option value={category.name} id={category.id}>{category.name}</option>)}
                                 </select>
                                 <input type="submit" value="Submit" className="item-submit"/>
                             </form>
+                            <button onClick={this.handleBtnClick}>Cancel</button>
                         </div>
                         :
                         ''
                     :
                     ''
                 }
-                <div className="add-item" onClick={this.handleBtnClick}><span>+</span></div>
-            </div>
+            </>
         );
     }
 }

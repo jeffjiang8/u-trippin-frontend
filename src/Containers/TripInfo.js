@@ -35,7 +35,8 @@ class TripInfo extends Component {
             return <Redirect to='/home/' />
         }
 
-        const { from, 
+        const { from,
+                terminal, 
                 name,
                 year,
                 month,
@@ -56,7 +57,7 @@ class TripInfo extends Component {
                         <div className="detail-container">
                             <div className="trip-flight-detail-info">
                                 <ul className="trip-flight-detail-list">
-                                    <li>From: {from}</li>
+                                    <li>From: {from} Terminal{terminal}</li>
                                     <li>To: {name}/  
                                     {   this.state.airport !== null
                                         ?

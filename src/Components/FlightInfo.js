@@ -43,6 +43,7 @@ class FlightInfo extends Component {
                 body: JSON.stringify({
                     name: this.props.flight.arrivalAirportFsCode,
                     from: this.props.flight.departureAirportFsCode,
+                    terminal: this.props.flight.departureTerminal,
                     carrier: this.props.flight.carrierFsCode,
                     year: parsedYear,
                     month: parsedMonth,
