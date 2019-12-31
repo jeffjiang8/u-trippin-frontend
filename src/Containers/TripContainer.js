@@ -6,7 +6,7 @@ class TripContainer extends Component {
         // console.log(this.props)
         return (
             <div className="trip-container">
-                <TripList trips={this.props.trips} handleClick={this.props.handleClick} currentUser={this.props.currentUser}/>
+                <TripList trips={this.props.trips} handleClick={this.props.handleClick} currentUser={this.props.currentUser} handleTripDelete={this.props.handleTripDelete}/>
             </div>
         );
     }

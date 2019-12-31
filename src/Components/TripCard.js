@@ -8,7 +8,11 @@ class TripCard extends Component {
         }
         return (
             <div className="trip-card">
-                <p className="trip-name">TO: {this.props.trip.name}</p>
+                <div className="card-detail">
+                    <p className="trip-name">TO: {this.props.trip.name}</p>
+                    <span className="card-delete"
+                        onClick={()=>this.props.handleTripDelete(this.props.trip)}>X</span>
+                </div>
                 <div>
                     <Link to={`/home/${this.props.currentUser.username}/trips/${this.props.trip.id}`} >
                         <button className="button detail-button"

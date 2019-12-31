@@ -7,7 +7,7 @@ class TripList extends Component {
         return (
             <div className="trip-list-container">
                 {
-                    this.props.trips.map(trip => <TripCard key={trip.id} trip={trip}  handleClick={this.props.handleClick} currentUser={this.props.currentUser}/>)
+                    this.props.trips.map(trip => <TripCard key={trip.id} trip={trip}  handleClick={this.props.handleClick} currentUser={this.props.currentUser} handleTripDelete={this.props.handleTripDelete}/>)
                 }
             </div>
         );

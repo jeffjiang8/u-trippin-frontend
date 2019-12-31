@@ -640,3 +640,17 @@ input.item-submit {
   height: 20px;
   font-weight: 800;
 }
+
+.card-detail {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-delete {
+  text-align: center;
+  font-weight: 800;
+  align-items: center;
+  margin-right: 10px;
+  margin-top: 12px
+}

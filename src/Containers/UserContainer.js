@@ -16,8 +16,23 @@ class UserContainer extends Component {
         .then(data=>this.setState({myTrips: data.filter(data=>data.user_id === localStorage.user_id).reverse(), loading: false}))
     }
 
+    handleTripDelete = (trip)=>{
+        fetch(`http://localhost:4000/api/v1/trips/${trip.id}`, {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json",
+                "accepts": "application/json"
+            }
+        })
+        .then(resp=>resp.json())
+        .then( ()=> fetch('http://localhost:4000/api/v1/trips')
+                    .then(resp=>resp.json())
+                    .then(data=>this.setState({myTrips: data.filter(data=>data.user_id === localStorage.user_id).reverse(), loading: false})))
+        
+    }
+
     renderTripContainer = ()=>{
-        return <TirpContainer trips={this.state.myTrips} handleClick={this.props.handleClick} currentUser={this.props.currentUser}/>
+        return <TirpContainer trips={this.state.myTrips} handleClick={this.props.handleClick} currentUser={this.props.currentUser} handleTripDelete={this.handleTripDelete}/>
     }
 
     renderTripInfo = ()=>{
