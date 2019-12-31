@@ -8,7 +8,8 @@ class PackListContainer extends Component {
         categories: [],
         clicked: false,
         itemName: '',
-        itemCategory: ''
+        itemCategory: '',
+        loading: true
     }
 
     componentDidMount(){
@@ -37,6 +38,25 @@ class PackListContainer extends Component {
         this.setState({
             [name]: value
         })
+    }
+
+    handleDelete = (item)=>{
+        fetch(`http://localhost:4000/api/v1/items/${item.id}`, {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json",
+                "accepts": "application/json"
+            }
+        })
+        .then(resp=>resp.json())
+        .then(()=>fetch('http://localhost:4000/api/v1/items')
+                .then(resp=>resp.json())
+                .then(items=>this.setState({myItems: items.filter(item=>{
+                return(
+                item.user_id === localStorage.user_id && 
+                item.trip_id === this.props.trip.id.toString()
+                )
+        })})))
     }
 
     handleSelectChange = (e) => {
@@ -74,9 +94,9 @@ class PackListContainer extends Component {
         return (
             <>
                 <div className="pack-list-container">
-                    {   this.state.myItems !== null
+                    {   this.state.myItems !== null && this.state.myItems !== []
                         ?
-                        <ItemContainer myItems={this.state.myItems} trip={this.props.trip} handleBtnClick={this.handleBtnClick}/>
+                        <ItemContainer myItems={this.state.myItems} trip={this.props.trip} handleBtnClick={this.handleBtnClick} handleDelete={this.handleDelete}loading={this.state.loading}/>
                         :
                         ""
                     }
@@ -98,11 +118,11 @@ class PackListContainer extends Component {
                                         onChange={this.handleSelectChange} 
                                         name='itemCategory'>
                                     <option default>Select</option>
-                                    {this.state.categories.map(category=><option value={category.name} id={category.id}>{category.name}</option>)}
+                                    {this.state.categories.map(category=><option value={category.name} id={category.id} key={category.id}>{category.name}</option>)}
                                 </select>
                                 <input type="submit" value="Submit" className="item-submit"/>
                             </form>
-                            <button onClick={this.handleBtnClick}>Cancel</button>
+                            <button onClick={this.handleBtnClick} className="cancel-btn">Cancel</button>
                         </div>
                         :
                         ''

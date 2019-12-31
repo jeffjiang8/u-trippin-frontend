@@ -456,7 +456,8 @@ li {
   font-size: 22px;
   margin-left: 13px;
   text-align: left;
-  margin-top: 10px
+  margin-top: 10px;
+  margin-bottom: 10px
 }
 
 div.select-path {
@@ -620,7 +621,7 @@ input.item-submit {
 
 .item-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 30px);
 }
 
