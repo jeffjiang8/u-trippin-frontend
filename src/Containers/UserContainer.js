@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TirpContainer from './TripContainer'
 import TripInfo from './TripInfo'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Link, Redirect} from 'react-router-dom'
 
 class UserContainer extends Component {
 
@@ -32,7 +32,9 @@ class UserContainer extends Component {
     }
 
     renderTripContainer = ()=>{
-        return <TirpContainer trips={this.state.myTrips} handleClick={this.props.handleClick} currentUser={this.props.currentUser} handleTripDelete={this.handleTripDelete}/>
+        return (
+            <TirpContainer trips={this.state.myTrips} handleClick={this.props.handleClick} currentUser={this.props.currentUser} handleTripDelete={this.handleTripDelete}/>
+        )
     }
 
     renderTripInfo = ()=>{
@@ -45,8 +47,18 @@ class UserContainer extends Component {
         if (this.state.loading){
             return <h1>loading...</h1>
         }
+
+        if (this.props.currentUser === null){
+            return <Redirect to='/home'/>
+        }
         return (
             <div className="user-container">
+                <div className="account-action">
+                    <h2 className="greeting">Hello, {this.props.currentUser.username}</h2>
+                    <Link to={`/home/${this.props.currentUser.username}/account`}>
+                        <button>Account Information</button>
+                    </Link>
+                </div>
                <Switch>
                    <Route path='/home/:username' render={this.renderTripContainer}/>
                </Switch>

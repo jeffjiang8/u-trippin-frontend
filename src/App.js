@@ -6,6 +6,7 @@ import Login from './Components/Login'
 import Signup from './Components/Signup'
 import NavBar from './Containers/NavBar'
 import TripInfo from './Containers/TripInfo'
+import UserInfo from './Components/UserInfo'
 import {Route, Switch} from 'react-router-dom'
 
 class App extends Component {
@@ -78,12 +79,15 @@ class App extends Component {
     return <UserContainer currentUser={this.state.currentUser} handleClick={this.handleClickTrip}/>
   }
 
+  renderUserInfo = ()=>{
+    return <UserInfo />
+  }
+
   renderTripInfo = ()=>{
     return <TripInfo currentUser={this.state.currentUser} trip={this.state.selectedTrip}/>
-}
+  }
 
   render(){
-    console.log(this.state.currentUser)
   return (
     <div className="App">
       <NavBar loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} handleClick={this.handleClick}/>
@@ -92,6 +96,7 @@ class App extends Component {
         <Route path='/signup' render={this.renderSignup} />
         <Route path='/login' render={this.renderLogin} />
         <Route exact path='/home/:username' render={this.renderUserPage} />
+        <Route path = '/home/:username/account' render={this.renderUserInfo} />
         <Route path='/home/:username/trips/:trip_id' render={this.renderTripInfo}/>
       </Switch>
     </div>
