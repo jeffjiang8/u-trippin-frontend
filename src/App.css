@@ -664,3 +664,10 @@ input.item-submit {
   width: 60%;
   margin-left: 20%;
 }
+
+.user-input {
+  width: 300px;
+  font-size: 20px;
+  text-align: center;
+  font-weight: 800;
+}
