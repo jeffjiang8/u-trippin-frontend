@@ -410,7 +410,7 @@ li {
 .trip-card {
   display:flex;
   flex-direction: row;
-  height: 6vh;
+  height: 45px;
   background-color: rgba(70, 70, 70, 0.3);
   margin: 15px;
   border-radius: 15px;
@@ -424,7 +424,7 @@ li {
 .trip-card:hover {
   display:flex;
   flex-direction: column;
-  height: 12vh;
+  height: 100px;
   background-color: rgba(70, 70, 70, 0.3);
   margin: 15px;
   border-radius: 15px;
@@ -537,6 +537,11 @@ div.select-path {
   font-size: 15px;
 }
 
+.trip-flight-detail-info {
+  width: 50%;
+  
+}
+
 .detail-container {
   display: flex;
   flex-direction: row;
@@ -552,7 +557,9 @@ div.select-path {
   height: 250px;
   overflow: hidden;
   justify-content: space-evenly;
-  margin-top: -5px
+  margin-top: -5px;
+  position: relative;
+  align-items: center;
 }
 
 .trip-weather-background {
@@ -560,7 +567,6 @@ div.select-path {
   width: 500px;
   justify-content: center;
   position: relative;
-  bottom: 70px;
 }
 
 .weather-detail-list {
@@ -570,10 +576,18 @@ div.select-path {
 
 div.trip-weather-details{
   display: flex;
-  position:relative;
-  bottom: 380px;
+  position: absolute;
+  margin: 0 auto;
   font-weight: 800;
   justify-content: center;
+}
+
+img.trip-background-img {
+  width: 600px;
+  z-index: -1;
+  /* padding-top: 300px; */
+  display: block;
+  opacity: 0.7;
 }
 
 .weather-detail-list {
@@ -670,4 +684,45 @@ input.item-submit {
   font-size: 20px;
   text-align: center;
   font-weight: 800;
+}
+
+.confirm-delete {
+  width: 50%;
+  margin-left: 25%;
+  background-color: rgba(70, 70, 70, 0.3);
+  border-radius: 15px;
+}
+
+.account-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: baseline
+}
+
+.greeting {
+  width: 15%;
+}
+
+.cancel-btn {
+  width: 50%;
+  margin-left: 25%;
+}
+
+.category-select {
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 0;
+  -webkit-appearance: none;
+  height: 24px;
+  text-align: center;
+  text-align-last: center;
+  font-weight: 800;
+  color: white;
+  border-width: 2px;
+  border-radius: 0px;
+  border: white;
+  outline: none;
 }

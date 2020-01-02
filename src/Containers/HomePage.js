@@ -145,9 +145,9 @@ class HomePage extends Component {
         return (
             <>
                 <Switch>
-                    <Route exact path='/home' render={this.renderHomePage} />
-                    <Route exact path='/home/flights' render={this.renderFlights} />
                     <Route exact path='/home/flights/:flightNumber' render={this.renderInfo} />
+                    <Route exact path='/home/flights' render={this.renderFlights} />
+                    <Route exact path='/home' render={this.renderHomePage} />
                     {/* <Route exact path='/home/:username' render={this.renderUserPage} /> */}
                 </Switch>
             </>

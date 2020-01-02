@@ -116,7 +116,8 @@ class PackListContainer extends Component {
                                         />
                                 <select 
                                         onChange={this.handleSelectChange} 
-                                        name='itemCategory'>
+                                        name='itemCategory'
+                                        className="category-select">
                                     <option default>Select</option>
                                     {this.state.categories.map(category=><option value={category.name} id={category.id} key={category.id}>{category.name}</option>)}
                                 </select>

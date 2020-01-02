@@ -20,12 +20,10 @@ class FlightCard extends Component {
                 <div>
                     <Link to={`/home/flights/${this.props.flight.flightNumber}`} >
                         <button className="button detail-button"
-                                style={{height: '23px'}}
-                                style={{'font-size': '22px'}}
-                                style={{'fontWeight': '800'}}
+                                style={{height: '28px', fontSize: '22px', fontWeight: '800'}}
                                 onClick={()=>this.props.handleClick(this.props.flight)}
                                 >
-                            <span data-title="DETAILS"></span>
+                            <span data-title="GO!">Details</span>
                         </button>
                     </Link>
                 </div>

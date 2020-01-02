@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BackgroundImg from './BackgroundImg'
+import TripWeatherBackground from './TripWeatherBackground'
 
 class TripWeatherInfo extends Component {
 
@@ -39,7 +40,7 @@ class TripWeatherInfo extends Component {
             return (
                 <>
                     <div className="trip-weather-background">
-                        <BackgroundImg query={this.state.weather.city_name}/>
+                        <TripWeatherBackground query={this.state.weather.city_name}/>
                     </div>
                     <div className="trip-weather-details">
                         <ul className="weather-detail-list">

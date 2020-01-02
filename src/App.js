@@ -65,7 +65,11 @@ class App extends Component {
     this.setState({
         selectedTrip: trip
     })
-}
+  }
+
+  handleLoggedInState = ()=>{
+    this.setState({loggedIn: false})
+  }
 
   renderLogin = ()=>{
       return <Login setUser={this.setUser}/>
@@ -80,7 +84,7 @@ class App extends Component {
   }
 
   renderUserInfo = ()=>{
-    return <UserInfo />
+    return <UserInfo handleDelete={this.handleClick}/>
   }
 
   renderTripInfo = ()=>{
@@ -93,11 +97,11 @@ class App extends Component {
       <NavBar loggedIn={this.state.loggedIn} currentUser={this.state.currentUser} handleClick={this.handleClick}/>
       <HomePage loggedIn={this.state.loggedIn} currentUser={this.state.currentUser}/>
       <Switch>
+        <Route exact path='/home/:username/trips/:trip_id' render={this.renderTripInfo}/>
         <Route path='/signup' render={this.renderSignup} />
         <Route path='/login' render={this.renderLogin} />
-        <Route exact path='/home/:username' render={this.renderUserPage} />
         <Route path = '/home/:username/account' render={this.renderUserInfo} />
-        <Route path='/home/:username/trips/:trip_id' render={this.renderTripInfo}/>
+        <Route exact path='/home/@:username' render={this.renderUserPage} />
       </Switch>
     </div>
   )

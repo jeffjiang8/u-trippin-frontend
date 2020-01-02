@@ -6,12 +6,15 @@ class UserInfo extends Component {
     state = {
         user: null,
         clicked: false,
+        confirmation: false,
         newUsername: '',
         newFirstName: '',
         newLastName: '',
         newAge: '',
         newEmail: '',
         newPhoneNumber: '',
+        loading: true,
+        deleted: false,
     }
 
     componentDidMount(){
@@ -24,7 +27,8 @@ class UserInfo extends Component {
             newLastName: user.last_name,
             newAge: user.age,
             newEmail: user.email,
-            newPhoneNumber: user.phone_number
+            newPhoneNumber: user.phone_number,
+            loading: false
         }))
     }
 
@@ -60,44 +64,49 @@ class UserInfo extends Component {
             })
         })
         .then(resp=>resp.json())
-        // .then(  fetch(`http://localhost:4000/api/v1/users/${localStorage.user_id}`)
-        //         .then(resp=>resp.json())
-        //         .then(user=>this.setState({
-        //             user: user,
-        //             newUsername: user.username,
-        //             newFirstName: user.first_name,
-        //             newLastName: user.last_name,
-        //             newAge: user.age,
-        //             newEmail: user.email,
-        //             newPhoneNumber: user.phone_number
-        // })))
-        // .then(()=>this.setState({ clicked: false }))
+        .then(()=>this.setState({loading: true}))
+        .then(()=>{ fetch(`http://localhost:4000/api/v1/users/${localStorage.user_id}`)
+                .then(resp=>resp.json())
+                .then(user=>this.setState({
+                    user: user,
+                    newUsername: user.username,
+                    newFirstName: user.first_name,
+                    newLastName: user.last_name,
+                    newAge: user.age,
+                    newEmail: user.email,
+                    newPhoneNumber: user.phone_number,
+                    loading: false,
+                    clicked: false 
+        }))})
         
     }
 
+    handleBtnClick = ()=>{
+        this.setState({confirmation: !this.state.confirmation})
+    }
+
     handleDeleteAccount = ()=>{
-        // fetch(`http://localhost:4000/api/v1/users/${localStorage.user_id}`,{
-        //     method: "DELETE",
-        //     headers: {
-        //         "content-type": "application/json",
-        //         "accepts": "application/json"
-        //     }
-        // })
-        // .then(resp=>resp.json())
-        // .then(()=>{
-        //    return (
-        //    localStorage.removeItem("user_id")
-        //    this.history.push('/home')
-        //    )
-        // })
+        fetch(`http://localhost:4000/api/v1/users/${localStorage.user_id}`,{
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json",
+                "accepts": "application/json"
+            }
+        })
+        .then(resp=>resp.json())
+        .then(()=>{this.props.handleDelete()})
     }
 
     render() {
-        if (localStorage.user_id === null){
+        if (this.state.loading){
+           return <p>loading</p>
+        }
+        if (this.state.deleted){
             return <Redirect to="/home" />
         }
         return (
             <div className="user-account" onDoubleClick={this.handleDoubleClick}>
+                <h1>Account Information</h1>
                 {   this.state.user === null
                     ?
                     ""
@@ -149,9 +158,22 @@ class UserInfo extends Component {
                             <h2>Email: {this.state.user.email}</h2>
                             <h2>Phone Number: {this.state.user.phone_number}</h2>
                             <div className="user-account-action">
-                                <button onClick={this.handleDeleteAccount}>Delete Account</button>
+                                <button onClick={this.handleBtnClick}>Delete Account</button>
                             </div>
                         </>
+                }
+                {
+                    this.state.confirmation
+                    ?
+                    <div className="confirm-delete">
+                        <p>Are you Sure?</p>
+                        <div className="delete-btns">
+                            <button onClick={this.handleDeleteAccount}>Confirm</button>
+                            <button onClick={this.handleBtnClick}>Cancel</button>
+                        </div>
+                    </div>
+                    :
+                    ""
                 }
             </div>
         );

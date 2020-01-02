@@ -12,7 +12,7 @@ class NavBar extends Component {
                         {this.props.loggedIn
                         ?
                         <div className="user-action">
-                            <Link to={`/home/${this.props.currentUser.username}`}>Hello, {this.props.currentUser.username}</Link>&nbsp;
+                            <Link to={`/home/@${this.props.currentUser.username}`}>Hello, {this.props.currentUser.username}</Link>&nbsp;
                             |
                             &nbsp;<Link to='/home'><p className="logout" onClick={this.props.handleClick}>LogOut</p></Link>
                         </div>

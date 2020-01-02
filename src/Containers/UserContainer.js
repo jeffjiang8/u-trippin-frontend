@@ -55,12 +55,12 @@ class UserContainer extends Component {
             <div className="user-container">
                 <div className="account-action">
                     <h2 className="greeting">Hello, {this.props.currentUser.username}</h2>
-                    <Link to={`/home/${this.props.currentUser.username}/account`}>
-                        <button>Account Information</button>
+                    <Link to={`/home/@${this.props.currentUser.username}/account`}>
+                        <button className="account-btn">Account Information</button>
                     </Link>
                 </div>
                <Switch>
-                   <Route path='/home/:username' render={this.renderTripContainer}/>
+                   <Route path='/home/@:username' render={this.renderTripContainer}/>
                </Switch>
             </div>
         );

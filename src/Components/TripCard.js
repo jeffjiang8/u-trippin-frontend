@@ -16,13 +16,10 @@ class TripCard extends Component {
                 <div>
                     <Link to={`/home/${this.props.currentUser.username}/trips/${this.props.trip.id}`} >
                         <button className="button detail-button"
-                                style={{height: '23px'}}
-                                style={{'font-size': '22px'}}
-                                style={{'fontWeight': '800'}}
-                                style={{margin: '0'}}
+                                style={{height: '28px', fontSize: '22px', fontWeight: '800', fontFamily: "'Roboto', sans-serif"}}
                                 onClick={()=>this.props.handleClick(this.props.trip)}
                                 >
-                            <span data-title="DETAILS"></span>
+                            <span data-title="GO!">Details</span>
                         </button>
                     </Link>
                 </div>
