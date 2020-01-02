@@ -56,7 +56,7 @@ class UserContainer extends Component {
                 <div className="account-action">
                     <h2 className="greeting">Hello, {this.props.currentUser.username}</h2>
                     <Link to={`/home/@${this.props.currentUser.username}/account`}>
-                        <button className="account-btn">Account Information</button>
+                        <img src="http://localhost:3000/images/account.png" className="account-btn" alt="meh" />
                     </Link>
                 </div>
                <Switch>

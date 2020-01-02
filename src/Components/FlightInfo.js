@@ -102,8 +102,8 @@ class FlightInfo extends Component {
                                 this.props.loggedIn
                                 ?
                                 
-                                    <button onClick={this.book}>Book</button>
-                                // </Link>
+                                    // <button onClick={this.book}>Book</button>
+                                    <img src='http://localhost:3000/images/white-book.png' alt="meh" className="book-button" onClick={this.book}/>
                                 :
                                 ''
                             }
@@ -111,7 +111,7 @@ class FlightInfo extends Component {
                         </div>
                     </div>
                         <Link to='/home/flights'>
-                            <button>Back</button>
+                            <img src='http://localhost:3000/images/back.png' alt="meh" className="back-btn" />
                         </Link>
                 </>
                 :

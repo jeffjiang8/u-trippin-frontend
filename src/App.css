@@ -697,11 +697,11 @@ input.item-submit {
   display: flex;
   flex-direction: row;
   justify-content: left;
-  align-items: baseline
+  align-items: center
 }
 
 .greeting {
-  width: 15%;
+  width: 13%;
 }
 
 .cancel-btn {
@@ -725,4 +725,17 @@ input.item-submit {
   border-radius: 0px;
   border: white;
   outline: none;
+}
+
+.back-btn {
+  width: 50px;
+  margin-top: 10px
+}
+
+.book-button {
+  width: 50px;
+}
+
+.account-btn {
+  width: 40px
 }
