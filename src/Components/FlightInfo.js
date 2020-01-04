@@ -122,7 +122,7 @@ class FlightInfo extends Component {
                     <div className="select-path">
                         <p>Success...</p>
                         <div className="path-btns">
-                            <Link to={`/home/${this.props.currentUser.username}`}>
+                            <Link to={`/home/@${this.props.currentUser.username}`}>
                                 <button>DashBoard</button>
                             </Link>
                             <Link to='/home' >
